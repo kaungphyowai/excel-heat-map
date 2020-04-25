@@ -107,6 +107,12 @@ var tilelayer = {
         id : "mapbox/dark-v9"
     }
 }
+
+var geolevel = {
+    "States" : {
+        
+    }
+}
 //streets-v9
 //satellite-streets-v9
 //light-v9

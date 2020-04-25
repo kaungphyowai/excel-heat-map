@@ -5,7 +5,9 @@
     Purpose : This script is written by Phyo Kyi for Excel Heat Mapping Project...
 */
 
-var map = L.map('map').setView([20.838278, 96.020508], 6);
+var geolevel = config.geolevel;
+
+var map = L.map('map').setView([19.438278, 96.020508], 6);
 
 if (config.tilelayer.isOn) {
     var tilemap = leaflet_tilelayeradd(tilelayer[config.tilelayer.layer]);
@@ -15,8 +17,10 @@ if (config.tilelayer.isOn) {
 //quantitle
 if (config.layer.ranks == "quantitle") {
     var ranks = rank_quantitle(config.layer.data, config.layer.range);
-}if (config.layer.ranks == "custom") { 
-    var ranks = rank_custom(config.layer.data, config.layer.range,config.layer.customranks);
+} else if (config.layer.ranks == "custom") {
+    var ranks = rank_custom(config.layer.data, config.layer.range, config.layer.customranks);
+} else if (config.layer.ranks == "equalinterval") {
+    var ranks = rank_equalinterval(config.layer.data, config.layer.range);
 } else {
     var ranks = rank_equalinterval(config.layer.data, config.layer.range);
 }
@@ -50,8 +54,8 @@ function style(feature) {
 function highlightFeature(e) {
     var layer = e.target;
 
-    
-      
+
+
     layer.setStyle({
         weight: 5,
         color: '#ddd',
@@ -108,25 +112,26 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-function get_value(_pcode){
+function get_value(_pcode) {
     var result = ranks.filter(obj => {
         return obj.pcode === _pcode
     });
     return result[0].value;
 }
-function get_rank(_pcode){
+
+function get_rank(_pcode) {
     var result = ranks.filter(obj => {
         return obj.pcode === _pcode
     });
     return result[0].rank;
 }
 info.update = function (props) {
-    this._div.innerHTML = "<h4>Excel Heat Mapping</h4>"+(props ? 
+    this._div.innerHTML = "<h4>Excel Heat Mapping</h4>" + (props ?
         `State/Region ${props.ST}<br>
         State/Region PCode : ${props.ST_PCODE}<br>
         Value : ${get_value(props.ST_PCODE)}<br>
-        Rank : ${get_rank(props.ST_PCODE)}<br>`
-        : "Hover over a state");
+        Rank : ${get_rank(props.ST_PCODE)}<br>` :
+        "Hover over a state");
 };
 
 info.addTo(map);

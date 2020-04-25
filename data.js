@@ -28,6 +28,7 @@ var colorrange = {
 }
 //config.layer.data
 var config = {
+    geolevel : "States",
     layer : 
         {
             Name : "Heat Map 1",
