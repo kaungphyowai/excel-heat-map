@@ -14,9 +14,11 @@ if (config.tilelayer.isOn) {
 
 //quantitle
 if (config.layer.ranks == "quantitle") {
-    var ranks = quantitle(config.layer.data, config.layer.range);
+    var ranks = rank_quantitle(config.layer.data, config.layer.range);
+}if (config.layer.ranks == "custom") { 
+    var ranks = rank_custom(config.layer.data, config.layer.range,config.layer.customranks);
 } else {
-    var ranks = equalinterval(config.layer.data, config.layer.range);
+    var ranks = rank_equalinterval(config.layer.data, config.layer.range);
 }
 
 
@@ -38,7 +40,7 @@ function style(feature) {
     return {
         weight: 2,
         opacity: 1,
-        color: 'white',
+        color: 'black',
         dashArray: '3',
         fillOpacity: 0.7,
         fillColor: getColor(feature.properties["ST_PCODE"])
@@ -48,9 +50,11 @@ function style(feature) {
 function highlightFeature(e) {
     var layer = e.target;
 
+    
+      
     layer.setStyle({
         weight: 5,
-        color: '#666',
+        color: '#ddd',
         dashArray: '',
         fillOpacity: 0.7
     });
@@ -74,6 +78,7 @@ function zoomToFeature(e) {
 }
 
 function onEachFeature(feature, layer) {
+
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
@@ -116,13 +121,11 @@ function get_rank(_pcode){
     return result[0].rank;
 }
 info.update = function (props) {
-    var v = props;
-    console.log(v);
     this._div.innerHTML = "<h4>Excel Heat Mapping</h4>"+(props ? 
-        "State/Region " + props.ST + "<br>" +
-        "State/Region PCode : " + props.ST_PCODE + "<br>" +
-        "Value : " + get_value(props.ST_PCODE) + "<br>" +
-        "Rank : " + get_rank(props.ST_PCODE) + "<br>"
+        `State/Region ${props.ST}<br>
+        State/Region PCode : ${props.ST_PCODE}<br>
+        Value : ${get_value(props.ST_PCODE)}<br>
+        Rank : ${get_rank(props.ST_PCODE)}<br>`
         : "Hover over a state");
 };
 

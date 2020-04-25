@@ -34,11 +34,21 @@ var config = {
             data : data,
             range : 8,
             colors : colorrange,
-            ranks : "equalinterval"
+            ranks : "custom",
+            customranks : [
+                {rank:1,lt:100,gte:95},
+                {rank:2,lt:95,gte:90},
+                {rank:3,lt:90,gte:85},
+                {rank:4,lt:85,gte:80},
+                {rank:5,lt:80,gte:75},
+                {rank:6,lt:75,gte:70},
+                {rank:7,lt:70,gte:65},
+                {rank:8,lt:65,gte:0}
+            ]
         }
     ,
     tilelayer : {
-        isOn : true,
+        isOn : false,
         layer : "mapbox/light-v9"
     }
 }

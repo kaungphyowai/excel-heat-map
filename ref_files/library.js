@@ -15,7 +15,7 @@ function getRank(value, max, diff, n) {
     return n;
 }
 
-function quantitle(dx, n) {
+function rank_quantitle(dx, n) {
     var sortable = [];
     for (var x in dx) {
         sortable.push([dx[x].pcode, dx[x].value]);
@@ -47,7 +47,7 @@ function quantitle(dx, n) {
     return result;
 }
 
-function equalinterval(dx, n) {
+function rank_equalinterval(dx, n) {
     //keys = Object.keys(dx);
     //values = Object.values(dx);
     var len = data.length;
@@ -69,6 +69,22 @@ function equalinterval(dx, n) {
         dx[index].rank = rank;
     });
     console.log(dx);
+    return dx;
+}
+
+function rank_custom(dx,n,custom){
+    dx.forEach(function(v,index){
+        var rank=0;
+        //console.log(v);
+        for(var x=0;x<custom.length;x++){
+            //console.log(custom[x]);
+            if(v.value>=custom[x].gte && v.value<custom[x].lt){
+                rank=custom[x].rank;
+                //console.log(custom[x]);
+            }
+        }
+        dx[index].rank=rank;
+    });
     return dx;
 }
 
