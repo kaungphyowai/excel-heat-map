@@ -15,7 +15,7 @@ var data =
     {pcode:"MMR222",value: 84},
     {pcode:"MMR006",value: 34},
     {pcode:"MMR013",value: 51}
-];
+]; 
 var colorrange = {
     1 : '#800026',
 	2 : '#BD0026',
