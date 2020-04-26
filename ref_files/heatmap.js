@@ -5,24 +5,29 @@
     Purpose : This script is written by Phyo Kyi for Excel Heat Mapping Project...
 */
 
+var rankmethod = config.layer.ranks;
+var layerdata = config.layer.data;
 var geolevel = config.geolevel;
+var nrange = config.layer.range;
+var geocode = config.geocode;
+var geoname = config.geoname;
 
 var map = L.map('map').setView([19.438278, 96.020508], 6);
 
-if (config.tilelayer.isOn) {
-    var tilemap = leaflet_tilelayeradd(tilelayer[config.tilelayer.layer]);
+if (config.advanced.tilelayer.isOn) {
+    var tilemap = leaflet_tilelayeradd(tilelayer[config.advanced.tilelayer.layer]);
     tilemap.addTo(map);
 }
 
 //quantitle
-if (config.layer.ranks == "quantitle") {
-    var ranks = rank_quantitle(config.layer.data, config.layer.range);
-} else if (config.layer.ranks == "custom") {
-    var ranks = rank_custom(config.layer.data, config.layer.range, config.layer.customranks);
-} else if (config.layer.ranks == "equalinterval") {
-    var ranks = rank_equalinterval(config.layer.data, config.layer.range);
+if (rankmethod == "quantitle") {
+    var ranks = rank_quantitle(layerdata, nrange);
+} else if (rankmethod == "custom") {
+    var ranks = rank_custom(layerdata, nrange, config.layer.customranks);
+} else if (rankmethod == "equalinterval") {
+    var ranks = rank_equalinterval(layerdata, nrange);
 } else {
-    var ranks = rank_equalinterval(config.layer.data, config.layer.range);
+    var ranks = rank_equalinterval(layerdata, nrange);
 }
 
 
@@ -41,26 +46,27 @@ function getColor(value) {
 }
 
 function style(feature) {
+    var cass=config.advanced.shape_style;
     return {
-        weight: 2,
-        opacity: 1,
-        color: 'black',
-        dashArray: '3',
-        fillOpacity: 0.7,
-        fillColor: getColor(feature.properties["ST_PCODE"])
+        weight: cass.border_thinkness,
+        opacity: cass.border_opacity,
+        color: cass.border_color,
+        dashArray: cass.border_type,
+        fillOpacity: cass.fill_opacity,
+        fillColor: getColor(feature.properties[geocode])
     };
 }
 
 function highlightFeature(e) {
     var layer = e.target;
 
-
-
+    var cahf = config.advanced.highlightFeature;
     layer.setStyle({
-        weight: 5,
-        color: '#ddd',
-        dashArray: '',
-        fillOpacity: 0.7
+        weight: cahf.border_thinkness,
+        opacity : cahf.border_opacity,
+        color: cahf.border_color,
+        dashArray: cahf.border_type,
+        fillOpacity: cahf.fill_opacity
     });
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -91,7 +97,7 @@ function onEachFeature(feature, layer) {
 }
 
 function mapFilter(feature) {
-    if (feature.properties["ST_PCODE"] != "") return true
+    if (feature.properties[geocode] != "") return true
 }
 
 geojson = L.geoJson(geoData, {
@@ -127,11 +133,13 @@ function get_rank(_pcode) {
 }
 info.update = function (props) {
     this._div.innerHTML = "<h4>Excel Heat Mapping</h4>" + (props ?
-        `State/Region ${props.ST}<br>
-        State/Region PCode : ${props.ST_PCODE}<br>
-        Value : ${get_value(props.ST_PCODE)}<br>
-        Rank : ${get_rank(props.ST_PCODE)}<br>` :
+        `State/Region ${props[geoname]}<br>
+        State/Region PCode : ${props[geocode]}<br>
+        Value : ${get_value(props[geocode])}<br>
+        Rank : ${get_rank(props[geocode])}<br>` :
         "Hover over a state");
 };
 
 info.addTo(map);
+
+document.getElementById("map").style.backgroundColor = config.advanced.map.background_color;

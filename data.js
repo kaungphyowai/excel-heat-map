@@ -29,6 +29,8 @@ var colorrange = {
 //config.layer.data
 var config = {
     geolevel : "States",
+    geocode : "ST_PCODE",
+    geoname : "ST",
     layer : 
         {
             Name : "Heat Map 1",
@@ -48,9 +50,28 @@ var config = {
             ]
         }
     ,
-    tilelayer : {
-        isOn : false,
-        layer : "mapbox/light-v9"
+    advanced : {
+        map : {
+            background_color : "#ffffff"
+        },
+        tilelayer : {
+            isOn : false,
+            layer : "mapbox/light-v9"
+        },
+        shape_style : {
+            border_thinkness : 2,
+            border_opacity : 1,
+            border_color : '#000000',
+            border_type : 3,
+            fill_opacity : 0.7
+        },
+        highlightFeature : {
+            border_thinkness : 5,
+            border_opacity : 1,
+            border_color : "#ddd",
+            border_type : 1,
+            fill_opacity : 0.7
+        }
     }
 }
 
