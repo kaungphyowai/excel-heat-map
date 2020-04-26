@@ -26,35 +26,25 @@ var colorrange = {
 	7 : '#FED976' ,
 	8 : '#FFEDA0'
 }
-//config.layer.data
+
 var config = {
     geolevel : "States",
     layer : 
         {
-            Name : "Heat Map 1",
+            Name : "Excel Heat Mapping",
             data : data,
-            range : 8,
             colors : colorrange,
-            ranks : "equalbreak",
-            customranks : [
-                {rank:1,lt:1000,gte:95},
-                {rank:2,lt:95,gte:90},
-                {rank:3,lt:90,gte:85},
-                {rank:4,lt:85,gte:80},
-                {rank:5,lt:80,gte:75},
-                {rank:6,lt:75,gte:70},
-                {rank:7,lt:70,gte:65},
-                {rank:8,lt:65,gte:0}
-            ]
+            ranks : "quantitle"
         }
     ,
     advanced : {
         map : {
-            background_color : "#ffffff"
+            background_color : "#ffffff",
+            range : 8
         },
         tilelayer : {
             isOn : false,
-            layer : "mapbox/light-v9"
+            layer : "openstreetmap/standard"
         },
         shape_style : {
             border_thinkness : 2,
@@ -69,9 +59,16 @@ var config = {
             border_color : "#ddd",
             border_type : 1,
             fill_opacity : 0.7
-        }
+        },
+        customranks : [
+            {rank:1,lt:1000,gte:950},
+            {rank:2,lt:950,gte:900},
+            {rank:3,lt:900,gte:850},
+            {rank:4,lt:850,gte:800},
+            {rank:5,lt:800,gte:750},
+            {rank:6,lt:750,gte:700},
+            {rank:7,lt:700,gte:650},
+            {rank:8,lt:650,gte:0}
+        ]
     }
 }
-
-
-

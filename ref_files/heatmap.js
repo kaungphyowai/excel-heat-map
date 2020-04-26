@@ -1,14 +1,14 @@
 /*
     Script Name : heatmap.js
     Creation Date : April 25, 2020
-    Modification Date : April 25, 2020
+    Modification Date : April 26, 2020
     Purpose : This script is written by Phyo Kyi for Excel Heat Mapping Project...
 */
 
 var rankmethod = config.layer.ranks;
 var layerdata = config.layer.data;
 var cgl = geolevel[config.geolevel];
-var nrange = config.layer.range;
+var nrange = config.advanced.map.range;
 var geocode = cgl.geocode;
 var geoname = cgl.geoname;
 var geosrc = cgl.src;
@@ -18,7 +18,7 @@ var excludelist = layerdata.filter(obj => {
 });
 
 var exlist = [];
-excludelist.forEach(function(value,index){
+excludelist.forEach(function (value, index) {
     exlist.push(value.pcode);
 });
 
@@ -29,8 +29,6 @@ console.log(layerdata);
 
 var script = document.createElement('script');
 script.onload = function () {
-    //do stuff with the script
-
 
     var map = L.map('map').setView([19.438278, 96.020508], 6);
 
@@ -39,25 +37,22 @@ script.onload = function () {
         tilemap.addTo(map);
     }
 
-    //quantitle
     if (rankmethod == "quantitle") {
         var ranks = rank_quantitle(layerdata, nrange);
     } else if (rankmethod == "custom") {
-        var ranks = rank_custom(layerdata, nrange, config.layer.customranks);
+        var ranks = rank_custom(layerdata, nrange, config.advanced.customranks);
     } else if (rankmethod == "equalinterval") {
         var ranks = rank_equalinterval(layerdata, nrange);
     } else {
         var ranks = rank_equalinterval(layerdata, nrange);
     }
 
-
-    // get color depending on population density value
     function getColor(value) {
-        //console.log(value);
+
         var result = ranks.filter(obj => {
             return obj.pcode === value
         });
-        //console.log(result);
+
         if (result.length == 0) {
             return "FFFFFF";
         }
@@ -117,7 +112,7 @@ script.onload = function () {
     }
 
     function mapFilter(feature) {
-        if (!exlist.includes(feature.properties[geocode])) return true        
+        if (!exlist.includes(feature.properties[geocode])) return true
     }
 
     geojson = L.geoJson(geoData, {
@@ -129,7 +124,6 @@ script.onload = function () {
     geojson.addTo(map);
 
 
-    // control that shows state info on hover
     var info = L.control();
 
     info.onAdd = function (map) {
@@ -152,7 +146,7 @@ script.onload = function () {
         return result[0].rank;
     }
     info.update = function (props) {
-        this._div.innerHTML = "<h4>Excel Heat Mapping</h4>" + (props ?
+        this._div.innerHTML = `<h4>${config.layer.Name}</h4>` + (props ?
             `State/Region ${props[geoname]}<br>
         State/Region PCode : ${props[geocode]}<br>
         Value : ${get_value(props[geocode])}<br>

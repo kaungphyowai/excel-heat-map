@@ -1,17 +1,20 @@
+/*
+    Script Name : library.js
+    Creation Date : April 25, 2020
+    Modification Date : April 26, 2020
+    Purpose : This script is written by Phyo Kyi for Excel Heat Mapping Project...
+*/
+
 var tilelayer = {
-    "mapbox/light-v9":{
-        url : "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
-        attribuition : 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery ? <a href="https://www.mapbox.com/">Mapbox</a>',
-        id : "mapbox/light-v9"
+    "openstreetmap/standard":{
+        url : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        attribuition : '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        id : ""
     },
-    "mapbox/dark-v9":{
-        url : "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
-        attribuition : 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery ? <a href="https://www.mapbox.com/">Mapbox</a>',
-        id : "mapbox/dark-v9"
+    "openstreetmap/humanitarian":{
+        url : "https://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+        attribuition : '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        id : ""
     }
 }
 
@@ -22,8 +25,3 @@ var geolevel = {
         src : "./ref_files/state.js"
     }
 }
-//streets-v9
-//satellite-streets-v9
-//light-v9
-//dark-v9
-//outdoors-v9
