@@ -29,8 +29,6 @@ var colorrange = {
 //config.layer.data
 var config = {
     geolevel : "States",
-    geocode : "ST_PCODE",
-    geoname : "ST",
     layer : 
         {
             Name : "Heat Map 1",
