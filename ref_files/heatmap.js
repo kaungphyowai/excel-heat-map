@@ -13,6 +13,20 @@ var geocode = cgl.geocode;
 var geoname = cgl.geoname;
 var geosrc = cgl.src;
 
+var excludelist = layerdata.filter(obj => {
+    return obj.exclude === true
+});
+
+var exlist = [];
+excludelist.forEach(function(value,index){
+    exlist.push(value.pcode);
+});
+
+var layerdata = layerdata.filter(obj => {
+    return obj.exclude === false
+});
+console.log(layerdata);
+
 var script = document.createElement('script');
 script.onload = function () {
     //do stuff with the script
@@ -103,7 +117,7 @@ script.onload = function () {
     }
 
     function mapFilter(feature) {
-        if (feature.properties[geocode] != "") return true
+        if (!exlist.includes(feature.properties[geocode])) return true        
     }
 
     geojson = L.geoJson(geoData, {

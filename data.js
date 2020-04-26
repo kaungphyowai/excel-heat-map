@@ -1,20 +1,20 @@
 var data = 
 [
-    {pcode:"MMR017",value: 56},
-    {pcode:"MMR111",value: 51},
-    {pcode:"MMR004",value: 14},
-    {pcode:"MMR001",value: 5},
-    {pcode:"MMR002",value: 5},
-    {pcode:"MMR003",value: 75},
-    {pcode:"MMR009",value: 27},
-    {pcode:"MMR010",value: 87},
-    {pcode:"MMR011",value: 80},
-    {pcode:"MMR018",value: 92},
-    {pcode:"MMR012",value: 35},
-    {pcode:"MMR005",value: 77},
-    {pcode:"MMR222",value: 84},
-    {pcode:"MMR006",value: 34},
-    {pcode:"MMR013",value: 51}
+    {pcode:"MMR017",value: '800', exclude:false},
+    {pcode:"MMR111",value: '510', exclude:false},
+    {pcode:"MMR004",value: '140', exclude:false},
+    {pcode:"MMR001",value: '50', exclude:false},
+    {pcode:"MMR002",value: '50', exclude:false},
+    {pcode:"MMR003",value: '750', exclude:false},
+    {pcode:"MMR009",value: '270', exclude:false},
+    {pcode:"MMR010",value: '870', exclude:false},
+    {pcode:"MMR011",value: '800', exclude:false},
+    {pcode:"MMR018",value: '920', exclude:false},
+    {pcode:"MMR012",value: '350', exclude:false},
+    {pcode:"MMR005",value: '770', exclude:false},
+    {pcode:"MMR222",value: '840', exclude:false},
+    {pcode:"MMR006",value: '340', exclude:false},
+    {pcode:"MMR013",value: '510', exclude:false}
 ]; 
 var colorrange = {
     1 : '#800026',
@@ -35,9 +35,9 @@ var config = {
             data : data,
             range : 8,
             colors : colorrange,
-            ranks : "custom",
+            ranks : "equalbreak",
             customranks : [
-                {rank:1,lt:100,gte:95},
+                {rank:1,lt:1000,gte:95},
                 {rank:2,lt:95,gte:90},
                 {rank:3,lt:90,gte:85},
                 {rank:4,lt:85,gte:80},
