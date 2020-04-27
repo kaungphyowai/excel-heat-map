@@ -37,11 +37,11 @@ script.onload = function () {
         tilemap.addTo(map);
     }
 
-    if (rankmethod == "quantitle") {
+    if (rankmethod == "Quantitle") {
         var ranks = rank_quantitle(layerdata, nrange);
-    } else if (rankmethod == "custom") {
+    } else if (rankmethod == "Custom") {
         var ranks = rank_custom(layerdata, nrange, config.advanced.customranks);
-    } else if (rankmethod == "equalinterval") {
+    } else if (rankmethod == "Equal Interval") {
         var ranks = rank_equalinterval(layerdata, nrange);
     } else {
         var ranks = rank_equalinterval(layerdata, nrange);
@@ -147,8 +147,8 @@ script.onload = function () {
     }
     info.update = function (props) {
         this._div.innerHTML = `<h4>${config.layer.Name}</h4>` + (props ?
-            `State/Region ${props[geoname]}<br>
-        State/Region PCode : ${props[geocode]}<br>
+            `Location Name ${props[geoname]}<br>
+        Location PCode : ${props[geocode]}<br>
         Value : ${get_value(props[geocode])}<br>
         Rank : ${get_rank(props[geocode])}<br>` :
             "Hover over a state");

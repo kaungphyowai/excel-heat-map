@@ -23,5 +23,15 @@ var geolevel = {
         geocode : "ST_PCODE",
         geoname : "ST",
         src : "./ref_files/state.js"
+    },
+    "District" : {
+        geocode : "DT_PCODE",
+        geoname : "DT",
+        src : "./ref_files/district.js"
+    },
+    "Township" : {
+        geocode : "TS_PCODE",
+        geoname : "TS",
+        src : "./ref_files/township.js"
     }
 }
