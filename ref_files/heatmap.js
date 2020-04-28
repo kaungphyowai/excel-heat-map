@@ -25,7 +25,7 @@ excludelist.forEach(function (value, index) {
 var layerdata = layerdata.filter(obj => {
     return obj.exclude === false
 });
-console.log(layerdata);
+//console.log(layerdata);
 
 var script = document.createElement('script');
 script.onload = function () {
@@ -103,7 +103,7 @@ script.onload = function () {
     }
 
     function onEachFeature(feature, layer) {
-
+        //console.log(feature);
         layer.on({
             mouseover: highlightFeature,
             mouseout: resetHighlight,

@@ -65,7 +65,7 @@ function rank_equalinterval(dx, n) {
         rank = getRank(value.value, max, diff, n);
         dx[index].rank = rank;
     });
-    console.log(dx);
+    //console.log(dx);
     return dx;
 }
 
