@@ -1,7 +1,6 @@
 /*
     Script Name : library.js
     Creation Date : April 25, 2020
-    Modification Date : April 26, 2020
     Purpose : This script is written by Phyo Kyi for Excel Heat Mapping Project...
 */
 
@@ -16,14 +15,14 @@ function getRank(value, max, diff, n) {
     return n;
 }
 
-function rank_quantitle(dx, n) {
+function rank_quantiles(dx, n) {
     var sortable = [];
     for (var x in dx) {
         sortable.push([dx[x].pcode, dx[x].value]);
     }
 
     sortable.sort(function (a, b) {
-        return a[1] - b[1];
+        return b[1] - a[1];
     });
 
     result = [];
@@ -44,15 +43,18 @@ function rank_quantitle(dx, n) {
         y.rank = rank;
         result.push(y);
     });
-    console.log(result);
+    //console.log(result);
     return result;
 }
 
-function rank_equalinterval(dx, n) {
 
-    var len = data.length;
+
+function rank_equalinterval(dx, n) {
+//console.log(dx);
+//console.log(data);
+    var len = dx.length;
     array = []
-    data.forEach(function (value, index) {
+    dx.forEach(function (value, index) {
         array.push(value.value);
     });
     max = Math.max(...array);
@@ -60,6 +62,8 @@ function rank_equalinterval(dx, n) {
 
     ranks = [];
     diff = (max - min) / n;
+
+    diff = Math.round(diff);
 
     dx.forEach(function (value, index) {
         rank = getRank(value.value, max, diff, n);
